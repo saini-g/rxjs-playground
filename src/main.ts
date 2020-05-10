@@ -1,13 +1,24 @@
-import obs from './observables';
+import { Observer } from 'rxjs';
+import { scanObs, switchedObs } from './operators';
+import { searchObs } from './typeahead';
 
-obs.subscribe(
-  function (value) {
+const observer: Observer<any> = {
+  next: function(value) {
     console.log('emitted value:', value);
   },
-  function (err) {
-    console.log('error thrown', err.message);
+  error: function(err) {
+    console.log('error thrown', err);
   },
-  function () {
+  complete: function() {
     console.log('emitting completed!');
   }
-);
+};
+
+const subscription = searchObs.subscribe(observer);
+
+/* const switchStopBtn = document.querySelector('#switch-stop') as Element;
+
+switchStopBtn.addEventListener('click', function() {
+  subscription.unsubscribe();
+  console.log('subscription destroyed!');
+}); */

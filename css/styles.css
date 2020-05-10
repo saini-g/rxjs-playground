@@ -1,0 +1,31 @@
+body {
+  margin: 0;
+  padding: 1rem;
+  font-family: sans-serif;
+}
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+section {
+  padding: 1rem;
+  border: 1px solid lightgrey;
+  margin-bottom: 1rem;
+}
+h2 {
+  margin: 0;
+  padding-bottom: 1rem;
+  font-weight: 100;
+}
+pre {
+  margin: 0;
+  padding: 0;
+  display: inline;
+  font-weight: 100;
+}
+button {
+  margin: 0 1rem;
+}
+.search-input {
+  padding: 0.25rem;
+  font-size: 1rem;
+}
