@@ -1,4 +1,4 @@
-import { Observer } from 'rxjs';
+import { Observer, Subscription } from 'rxjs';
 import { scanObs, switchedObs } from './operators';
 import { searchObs } from './typeahead';
 
@@ -14,11 +14,29 @@ const observer: Observer<any> = {
   }
 };
 
-const subscription = searchObs.subscribe(observer);
+// switchMap example
+function getSwitchSub(): Subscription {
+  return switchedObs.subscribe(observer);
+}
+let switchSub: Subscription;
 
-/* const switchStopBtn = document.querySelector('#switch-stop') as Element;
+const subscribeBtn = document.querySelector('#switch-subscribe') as Element;
+subscribeBtn.addEventListener('click', function() {
 
+  if (!switchSub) {
+    switchSub = getSwitchSub();
+    console.log('subscription created!');
+  }
+});
+const switchStopBtn = document.querySelector('#switch-stop') as Element;
 switchStopBtn.addEventListener('click', function() {
-  subscription.unsubscribe();
-  console.log('subscription destroyed!');
-}); */
+
+  if (switchSub) {
+    switchSub.unsubscribe();
+    console.log('subscription destroyed!');
+  }
+});
+
+// search example
+searchObs.subscribe(observer);
+

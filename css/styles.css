@@ -29,3 +29,13 @@ button {
   padding: 0.25rem;
   font-size: 1rem;
 }
+ul {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  list-style-type: circle;
+}
+ul > li {
+  line-height: 1.75;
+  color: rgba(50, 50, 50, 0.75);
+  font-size: 0.9rem;
+}
