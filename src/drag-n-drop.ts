@@ -5,13 +5,13 @@ const draggableBox = document.getElementById('draggable') as HTMLElement;
 const dragContainer = document.getElementById('drag-container') as HTMLElement;
 const dragRect = dragContainer.getBoundingClientRect();
 
+function updateBoxPosition(coords: { x: number, y: number }) {
+  draggableBox.style.left = `${coords.x}px`;
+  draggableBox.style.top = `${coords.y}px`;
+}
+
 function moveBox(coords: { x: number, y: number }) {
-  return of(coords).pipe(
-    tap(crds => {
-      draggableBox.style.left = `${crds.x}px`;
-      draggableBox.style.top = `${crds.y}px`;
-    })
-  );
+  return of(coords).pipe(tap(updateBoxPosition));
 }
 
 export const dragObs = fromEvent(draggableBox, 'mousedown').pipe(
