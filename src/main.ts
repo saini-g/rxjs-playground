@@ -1,6 +1,7 @@
 import { Observer, Subscription } from 'rxjs';
 import { scanObs, switchedObs } from './operators';
 import { searchObs } from './typeahead';
+import { dragObs } from './drag-n-drop';
 
 const observer: Observer<any> = {
   next: function(value) {
@@ -40,3 +41,5 @@ switchStopBtn.addEventListener('click', function() {
 // search example
 searchObs.subscribe(observer);
 
+// drag and drop example
+dragObs.subscribe();
