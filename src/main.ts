@@ -1,7 +1,9 @@
 import { Observer, Subscription } from 'rxjs';
+
 import { scanObs, switchedObs } from './operators';
 import { searchObs } from './typeahead';
 import { dragObs } from './drag-n-drop';
+import { userSubject } from './state-management';
 
 const observer: Observer<any> = {
   next: function(value) {
@@ -15,7 +17,7 @@ const observer: Observer<any> = {
   }
 };
 
-// switchMap example
+// #region switchMap example
 function getSwitchSub(): Subscription {
   return switchedObs.subscribe(observer);
 }
@@ -37,9 +39,27 @@ switchStopBtn.addEventListener('click', function() {
     console.log('subscription destroyed!');
   }
 });
+// #endregion
 
-// search example
+// #region search example
 searchObs.subscribe(observer);
+// #endregion
 
-// drag and drop example
+// #region drag and drop example
 dragObs.subscribe();
+// #endregion
+
+// #region state management using subject
+userSubject.subscribe({
+  next: function(user) {
+
+    if (user.id) {
+      const detailsBox = document.getElementById('user-details') as HTMLElement;
+      detailsBox.innerHTML = `
+        <p><strong>${user.name}</strong></p>
+        <p>${user.email}</p>
+      `;
+    }
+  }
+});
+// #endregion

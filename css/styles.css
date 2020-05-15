@@ -6,7 +6,8 @@ body {
 *, *::before, *::after {
   box-sizing: border-box;
 }
-section {
+section,
+.details-box {
   padding: 1rem;
   border: 1px solid lightgrey;
   margin-bottom: 1rem;
@@ -26,9 +27,11 @@ pre {
 button {
   margin: 0 1rem;
 }
-.search-input {
+.search-input,
+.select-list {
   padding: 0.25rem;
   font-size: 1rem;
+  margin-bottom: 0.5rem;
 }
 ul {
   margin-top: 0;
@@ -53,4 +56,11 @@ ul > li {
   top: 50%;
   left: 50%;
   transform: translate(-30px, -30px);
+  transition: top 50ms ease-in-out, left 50ms ease-in-out;
+}
+.details-box p {
+  padding: 0.5rem;
+  margin: 0;
+  font-size: 0.9rem;
+  color: #585858;
 }
