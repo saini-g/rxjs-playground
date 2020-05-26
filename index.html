@@ -42,6 +42,27 @@
     <div id="user-details" class="details-box"></div>
   </section>
 
+  <section>
+    <h2>Behavior Subject example</h2>
+    <p>used to multicast values to subscribers,
+      along with last emitted values to new subscribers</p>
+    <p>
+      first subscriber: <span id="emitted-vals"></span>
+    </p>
+    <div class="details-box">
+      <ul>
+        <li>
+          <button id="create-sub-1">Create 2nd Subscription</button>
+          <p>Received Values: <span id="sub-1"></span></p>
+        </li>
+        <li>
+          <button id="create-sub-2">Create 3rd Subscription</button>
+          <p>Received Values: <span id="sub-2"></span></p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
   <script src="./src/main.ts"></script>
 </body>
 </html>

@@ -1,9 +1,10 @@
 import { Observer, Subscription } from 'rxjs';
 
-import { scanObs, switchedObs } from './operators';
+import { switchedObs } from './operators';
 import { searchObs } from './typeahead';
 import { dragObs } from './drag-n-drop';
 import { userSubject } from './state-management';
+import { numberSubject } from './behavior-subject';
 
 const observer: Observer<any> = {
   next: function(value) {
@@ -61,5 +62,48 @@ userSubject.subscribe({
       `;
     }
   }
+});
+// #endregion
+
+// #region behaviour subject multicast example
+function setInnerText(el: HTMLElement, text: string) {
+  el.innerText = el.innerText ? el.innerText + '  ' + text : text;
+}
+
+const emittedVals = document.querySelector('#emitted-vals') as HTMLElement;
+const span1 = document.querySelector('#sub-1') as HTMLElement;
+const span2 = document.querySelector('#sub-2') as HTMLElement;
+
+numberSubject.subscribe({
+  next: function (value) {
+    setInnerText(emittedVals, value.toString());
+  },
+  complete: function () {
+    setInnerText(emittedVals, 'DONE!');
+  }
+});
+
+const subBtn1 = document.querySelector('#create-sub-1') as HTMLButtonElement;
+subBtn1.addEventListener('click', function() {
+  numberSubject.subscribe({
+    next: function(value) {
+      setInnerText(span1, value.toString());
+    },
+    complete: function() {
+      setInnerText(span1, 'DONE!');
+    }
+  });
+});
+
+const subBtn2 = document.querySelector('#create-sub-2') as HTMLButtonElement;
+subBtn2.addEventListener('click', function() {
+  numberSubject.subscribe({
+    next: function(value) {
+      setInnerText(span2, value.toString());
+    },
+    complete: function() {
+      setInnerText(span2, 'DONE!');
+    }
+  });
 });
 // #endregion
